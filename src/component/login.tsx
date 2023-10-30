@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import { auth } from '../firebase';
+import { useNavigate } from "react-router-dom";
+
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password)
-      console.log({ result })
-      // You are now logged in
+      if(result?.user?.uid) {
+        return navigate("/")
+      } else {
+        // TODO
+      }
     } catch (error) {
       console.error('Login failed:', error);
     }
