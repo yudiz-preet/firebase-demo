@@ -8,14 +8,16 @@ import { AuthProvider } from "./authHelper";
 
 function App() {
   return (
+    <AuthProvider>
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route element={<AuthProvider><PrivateRoutes /></AuthProvider>}>
+        <Route element={<PrivateRoutes />}>
           <Route path="/" element={<Dashboard />} />
         </Route>
       </Routes>
     </Router>
+    </AuthProvider>
   );
 }
 
